@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-mongoose.connect('mongodb://sully1313:fumaboy12@ds159180.mlab.com:59180/amazon13', function(err) {
+mongoose.connect('mongodb://root:abc123@ds159180.mlab.com:59180/amazon13', function(err) {
   if (err) {
     console.log(err);
   } else {
