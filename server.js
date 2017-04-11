@@ -19,7 +19,7 @@ mongoose.connect('mongodb://root:abc123@ds159180.mlab.com:59180/amazon13', funct
 });
 
 // Middleware
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
