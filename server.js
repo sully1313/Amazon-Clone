@@ -2,6 +2,8 @@ var express = require('express');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var ejs = require('ejs');
+var engine = require('ejs-mate');
 
 var User = require('./models/user');
 
@@ -17,10 +19,12 @@ mongoose.connect('mongodb://root:abc123@ds159180.mlab.com:59180/amazon13', funct
 });
 
 // Middleware
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
 
 
 // Create User Route
@@ -37,6 +41,15 @@ app.post('/create-user',function(req, res, next) {
   });
 });
 
+// homepage Route
+app.get('/', function(req, res) {
+  res.render('main/home');
+})
+
+// about page Route
+app.get('/about', function(req, res) {
+  res.render('main/about');
+});
 
 
 // Server listening on port 3000
