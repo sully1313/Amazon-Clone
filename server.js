@@ -7,14 +7,16 @@ var engine = require('ejs-mate');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('express-flash');
+var MongoStore = require('connect-mongo')(session);
+var passport = require('passport');
 
-
+var secret = require('./config/secret');
 var User = require('./models/user');
 
 var app = express();
 
 // MongoLab DB Connection
-mongoose.connect('mongodb://root:abc123@ds159180.mlab.com:59180/amazon13', function(err) {
+mongoose.connect(secret.database, function(err) {
   if (err) {
     console.log(err);
   } else {
@@ -31,7 +33,8 @@ app.use(cookieParser());
 app.use(session({
   resave: true,
   saveUninitialized: true,
-  secret: "Matt@#@@#"
+  secret: secret.secretKey,
+  store: new MongoStore({ url: secret.database, autoReconnect: true })
 }));
 app.use(flash());
 
@@ -47,7 +50,7 @@ app.use(userRoutes);
 
 
 // Server listening on port 3000
-app.listen(3000, function(err) {
+app.listen(secret.port, function(err) {
   if (err) throw err;
-  console.log("Server is Running on port 3000");
+  console.log("Server is Running on port " + secret.port);
 });
