@@ -1,6 +1,29 @@
 var router = require('express').Router();
 var Product = require('../models/product');
 
+
+function paginate(req, res, next) {
+
+  var perPage = 9;
+  var page = req.params.page;
+
+  Product
+    .find()
+    .skip(perPage * page)
+    .limit( perPage )
+    .populate('category')
+    .exec(function(err, products) {
+      if (err) return next(err);
+      Product.count().exec(function(err, count) {
+        if (err) return next(err);
+        res.render('main/product-main', {
+          products: products,
+          pages: count / perPage
+        });
+      });
+    });
+
+}
 //configure mongoosastic for search
 Product.createMapping(function(err, mapping) {
   if (err) {
@@ -50,8 +73,18 @@ router.get('/search', function(req, res, next) {
 });
 
 // homepage Route
-router.get('/', function(req, res) {
-  res.render('main/home');
+router.get('/', function(req, res, next) {
+  if (req.user) {
+    //Pagination
+    paginate(req, res, next);
+  } else {
+    res.render('main/home');
+  }
+});
+
+// paginate page # route
+router.get('/page/:page', function(req, res, next) {
+  paginate(req, res, next);
 });
 
 // about page Route
