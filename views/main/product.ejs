@@ -19,7 +19,7 @@
 
         <div class="col-md-4">
             <h3><%= product.name %></h3>
-            <h1><%= product.price %></h1>
+            <h1>$<%= product.price %></h1>
 
             <form method="post">
               <div class="btn-group" role="group" aria-label="...">
@@ -33,7 +33,7 @@
                   <input type="hidden" name="product_id" value="<%= product._id %>" id="quantity"></input>
                   <input type="hidden" name="priceHidden" value="<%= product.price %>" id="priceHidden"></input>
                   <input type="text" name="item" value="<%= product.name %>" class="form-control"></input>
-                  <input type="text" name="priceValue" value="<%= product.price %>" class="form-control"></input>
+                  <input type="text" name="priceValue" value="$<%= product.price %>" class="form-control"></input>
               </div>
 
               <% if (user) { %>
