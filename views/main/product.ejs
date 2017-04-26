@@ -21,7 +21,28 @@
             <h3><%= product.name %></h3>
             <h1><%= product.price %></h1>
 
+            <form method="post">
+              <div class="btn-group" role="group" aria-label="...">
+                <input type="hidden" name="quantity" value="1" id="quantity"></input>
+                <button type="button" id="minus" class="btn btn-default">-</button>
+                <button type="button" id="total" class="btn btn-default">1</button>
+                <button type="button" id="plus" class="btn btn-default">+</button>
+              </div>
 
+              <div class="form-group">
+                  <input type="hidden" name="product_id" value="<%= product._id %>" id="quantity"></input>
+                  <input type="hidden" name="priceHidden" value="<%= product.price %>" id="priceHidden"></input>
+                  <input type="text" name="item" value="<%= product.name %>" class="form-control"></input>
+                  <input type="text" name="priceValue" value="<%= product.price %>" class="form-control"></input>
+              </div>
+
+              <% if (user) { %>
+                <button type="submit" class="btn btn-primary btn-lg">Add to Cart</button>
+              <% } else { %>
+                <a href="/signup" class="btn btn-warning btn-lg">Signup to begin buying!</a>
+              <% } %>
+
+            </form>
         </div>
     </div>
 </div>
