@@ -32,8 +32,9 @@
               <div class="form-group">
                   <input type="hidden" name="product_id" value="<%= product._id %>" id="quantity"></input>
                   <input type="hidden" name="priceHidden" value="<%= product.price %>" id="priceHidden"></input>
+
                   <input type="text" name="item" value="<%= product.name %>" class="form-control"></input>
-                  <input type="text" name="priceValue" value="$<%= product.price %>" class="form-control"></input>
+                  <input type="text" name="priceValue" id="priceValue" class="form-control" value="<%= product.price %>"></input>
               </div>
 
               <% if (user) { %>
