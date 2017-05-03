@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var Product = require('../models/product');
-
+var Cart = require('../models/cart');
 
 function paginate(req, res, next) {
 
@@ -58,7 +58,7 @@ router.get('/cart', function(req, res, next) {
     .exec(function(err, foundCart) {
       if (err) return next(err);
       res.render('main/cart', {
-        cart: foundCart
+        foundCart: foundCart
       });
     });
 });
