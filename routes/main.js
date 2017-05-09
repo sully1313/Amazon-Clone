@@ -50,6 +50,7 @@ stream.on('error', function(err) {
   console.log(err);
 });
 
+
 //cart route
 router.get('/cart', function(req, res, next) {
   Cart
@@ -58,10 +59,25 @@ router.get('/cart', function(req, res, next) {
     .exec(function(err, foundCart) {
       if (err) return next(err);
       res.render('main/cart', {
-        foundCart: foundCart
+        foundCart: foundCart,
+        message: req.flash('remove')
       });
     });
 });
+
+// Delete items from cart route
+router.post('/remove', function(res, req, next) {
+  Cart.findOne({ owner: req.user._id }, function(err, foundCart) {
+    foundCart.items.pull(String(req.body.item));
+    foundCart.total = (foundCart.total - parseFloat(req.body.price)).toFixed(2);
+    foundCart.save(function(err, found) {
+      if (err) return next(err);
+      req.flash('remove', 'Successfully removed item(s)');
+      res.redirect('/cart');
+    });
+  });
+});
+
 
 //post for products being added to shopping cart
 router.post('/product/:product_id', function(req, res, next) {
