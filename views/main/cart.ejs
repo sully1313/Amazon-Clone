@@ -31,8 +31,6 @@
                   <input type="hidden" name="item" value="<%= foundCart.items[i]._id %>">
                   <input type="hidden" name="price" value="<%= foundCart.items[i].price %>">
                   <button type="submit" type="button">Remove</button>
-
-
                 </form>
               </div>
             </div>
@@ -44,7 +42,8 @@
     </div>
     <div class="col-md-3"></div>
 
-    <div class="col-md-3"></div>
+
+    <div class="col-md-3">
       <div class="list-group">
         <span class="list-group-item">
           <h4>Total: $<span class="totalPrice"><%= foundCart.total %></span></h4>
@@ -59,6 +58,8 @@
       </div>
 
   </div>
+</div>
+
 
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
