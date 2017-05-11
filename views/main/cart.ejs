@@ -67,6 +67,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title text-center" id="myModalLabel">Payment</h4>
               </div>
+
               <div class="modal-body">
                 <div class="container">
                   <div class="row">
@@ -86,7 +87,8 @@
                           </div>
                         </div>
                         <div class="panel-body">
-                          <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
+                          <form role="form" id="payment-form" action="/payment" method="POST">
+                            <input type="hidden" name="stripeMoney" value="<%= foundCart.total %>">
                             <div class="row">
                               <div class="col-xs-12">
                                 <div class="form-group">
@@ -130,7 +132,7 @@
                             </div>
                             <div class="row">
                               <div class="col-xs-12">
-                                <button type="submit" class="subscribe btn btn-success btn-lg btn-block">Place Order</button>
+                                <button type="submit" class="subscribe btn btn-success btn-lg btn-block">Pay: $&nbsp;<%= foundCart.total %> </button>
 
                               </div>
 

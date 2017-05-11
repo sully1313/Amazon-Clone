@@ -68,7 +68,7 @@ router.post('/signup',function(req, res, next) {
         if (err) return next(err);
         req.logIn(user, function(err) {
           if (err) return next(err);
-          res.redirect('/profile');
+          res.redirect('/');
         });
       });
     }
@@ -98,7 +98,7 @@ router.post('/edit-profile', function(req, res, next) {
     user.save(function(err) {
       if (err) return next(err);
       req.flash('success', 'Successfully Updated!');
-      return res.redirect('/edit-profile');
+      return res.redirect('/profile');
     });
   });
 });
